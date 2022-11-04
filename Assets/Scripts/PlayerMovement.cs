@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
+    Collider cl;
     public float walkSpeed = 4.0f;
     public float jumpSpeed = 8.0f;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        cl = GetComponent<Collider>();
+        print(cl.bounds.size);
     }
 
     // Update is called once per frame
@@ -48,6 +50,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     bool isGrounded() {
-        return true;
+        float sizeY = cl.bounds.size.y;
+        Vector3 pos = cl.bounds.center;
+        Vector3 bottom = pos + new Vector3(0, -sizeY/2 + 0.1f, 0);
+        bool grounded = Physics.Raycast(bottom, new Vector3(0, -1, 0), 0.15f);
+        return grounded;
     }
 }
