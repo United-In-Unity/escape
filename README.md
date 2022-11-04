@@ -2,3 +2,4 @@
 ## Current Progress:
 * Have a capsule that can jump once and move on the platform freely
 * Main Camera follows all character movement
+* Add GameManager to change levels
