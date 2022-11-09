@@ -5,5 +5,5 @@ https://huangruoqi.github.io/better_doodle/
 ## Current Progress:
 * Have a capsule that can jump once and move on the platform freely
 * Main Camera follows all character movement
-* Add GameManager to change levels
+* Add GameManager to change levels (currently if you jump you change level)
 
