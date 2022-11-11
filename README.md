@@ -6,7 +6,7 @@ https://huangruoqi.github.io/better_doodle/
 * Have a cube with legs that can jump once and move on the platform freely
 * Main Camera follows all character movement
 * Add GameManager to change levels (currently if you jump you change level)
-* Make sure to create a custom level/scene when testing out stuff, don't mess with existing scene if someone else is working on it because it will cause a merge conflict. A level/scene should only be manipulated by one branch, and don't working on the wrong branch :(
+* Make sure to create a custom level/scene when testing out stuff, don't mess with existing scene if someone else is working on it because it will cause a merge conflict. A level/scene should only be manipulated by one branch, and don't work on the wrong branch :(
     * To create custom scene: 
         * choose a scene -> <ctrl+d> or <command+d>
         * rename the duplicated scene to `level#`
