@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         var jumpInputReleased = Input.GetButtonUp("Jump");
         if (jumpInput && isGrounded()){
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
-            GameManager.instance.IncreaseLevel();
+            // GameManager.instance.IncreaseLevel();
         }
         if (jumpInputReleased && rb.velocity.y > 0) {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y/2, rb.velocity.z);
