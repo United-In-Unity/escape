@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public void Reset() {
         currentLevel = 1;
-        SceneManager.LoadScene("Level" + currentLevel);
+        LoadLevel();
     }
     public void IncreaseLevel() {
         if (currentLevel < highestLevel) {
@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         {
             currentLevel = 1;
         }
+        LoadLevel();
+    }
+
+    private void LoadLevel() {
         SceneManager.LoadScene("Level" + currentLevel);
+        PlayerManager.instance.SetPosition(new Vector3(0,1,0));
     }
 }
