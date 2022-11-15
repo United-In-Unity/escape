@@ -32,4 +32,13 @@ public class PlayerManager : MonoBehaviour
     public void SetPosition(Vector3 p) {
         transform.position = p;
     }
+
+    public void Die() {
+        print("Player is dead!!! Dead animation is playing...");
+        // TODO: Dead animation 
+        // TODO: GAME UI for options
+        // Options: MENU | RESTART
+            // UI: choose levels
+            // GameManager.instance.LoadLevel();
+    }
 }
