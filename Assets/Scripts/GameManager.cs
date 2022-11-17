@@ -35,8 +35,13 @@ public class GameManager : MonoBehaviour
         LoadLevel();
     }
 
-    private void LoadLevel() {
-        SceneManager.LoadScene("Level" + currentLevel);
+    public void LoadLevel(string name = "default") {
+        if (name=="default") {
+            SceneManager.LoadScene("Level" + currentLevel);
+        }
+        else {
+            SceneManager.LoadScene(name);
+        }
         PlayerManager.instance.SetPosition(new Vector3(0,1,0));
     }
 }

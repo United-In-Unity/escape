@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a046711c215c74f07a222a5246730da7, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a046711c215c74f07a222a5246730da7, type: 3}
 --- !u!1 &8585452464915088073 stripped
@@ -89,9 +93,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.91414356
-  m_Height: 2.961733
+  m_Height: 3.1172647
   m_Direction: 1
-  m_Center: {x: -0.15257931, y: 1.9835299, z: 0}
+  m_Center: {x: -0.15257931, y: 1.9057641, z: 0}
 --- !u!114 &-8384246414089643970
 MonoBehaviour:
   m_ObjectHideFlags: 0
