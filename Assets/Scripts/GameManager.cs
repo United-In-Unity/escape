@@ -7,8 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    CanvasGroup cg;
+
     public static int currentLevel = 1;
     public static int highestLevel = 2;
+
+    public float timer = 0f;
+    public float maxTime = 1.0f;
+    public bool isLoading = false;
 
     void Awake() {
         if (instance == null) {
@@ -18,6 +24,23 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Start() {
+        cg = this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<CanvasGroup>();
+    }
+
+    void Update() {
+        if (isLoading) {
+            timer += Time.deltaTime;
+            if (timer > maxTime) {
+                isLoading = false;
+                timer = 0f;
+                cg.alpha = 0f;
+                return;
+            }
+            cg.alpha = 1f - Mathf.Abs(timer/maxTime);
+        }
     }
 
     public void Reset() {
@@ -35,8 +58,15 @@ public class GameManager : MonoBehaviour
         LoadLevel();
     }
 
-    private void LoadLevel() {
-        SceneManager.LoadScene("Level" + currentLevel);
+    public void LoadLevel(string name = "default") {
+        if (name=="default") {
+            SceneManager.LoadScene("Level" + currentLevel);
+        }
+        else {
+            SceneManager.LoadScene(name);
+        }
+        isLoading = true;
+
         PlayerManager.instance.SetPosition(new Vector3(0,1,0));
     }
 }
