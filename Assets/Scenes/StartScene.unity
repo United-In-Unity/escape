@@ -309,7 +309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -688, y: 248.7}
+  m_AnchoredPosition: {x: -563, y: 334}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114731858
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 5
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -834,6 +834,14 @@ PrefabInstance:
     - target: {fileID: 3413065758463108468, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413065758463108469, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
+      propertyPath: maxTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413065758463108469, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
+      propertyPath: isLoading
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3413065758463108469, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
       propertyPath: _gameTimer
