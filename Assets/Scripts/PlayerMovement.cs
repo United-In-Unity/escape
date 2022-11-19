@@ -29,22 +29,28 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1")) {
             print("die!!!!!!!!!!!!!");
-            PlayerManager.instance.Die();
+            // PlayerManager.instance.Die();
         }
     }
 
     void WalkHandler() {
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
-        anim.SetBool("isWalking", Mathf.Abs(hInput + vInput) > 0.01f);
+        if (Mathf.Abs(hInput) > 0.01) hInput = Mathf.Sign(hInput);
+        else hInput = 0;
+        if (Mathf.Abs(vInput) > 0.01) vInput = Mathf.Sign(vInput);
+        else vInput = 0;
+        anim.SetBool("isWalking", Mathf.Abs(hInput) + Mathf.Abs(vInput) > 0.01);
         Vector2 direction = new Vector2(hInput, vInput);
-        direction.Normalize();
-        rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
-        // if (hInput < 0) 
-        //     transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
-        // else if (hInput > 0)
-        //     transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
-        // cam.transform.position = new Vector3(transform.position.x, cam.transform.position.y, cam.transform.position.z);
+        if (Mathf.Abs(hInput) + Mathf.Abs(vInput) > 0.1) {
+            float angle = Mathf.Atan(direction.x/direction.y);
+            if (direction.y < 0) angle = angle+Mathf.PI;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle*180/Mathf.PI, transform.eulerAngles.z);
+            rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
+        }
+        else {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
     }
     
 
