@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
             }
             cg.alpha = 1f - Mathf.Abs(timer / maxTime);
         }
-        _gameTimer.text = "Time Left: " + timer;
+        _gameTimer.text = "Time Left: " + System.Math.Round(timer, 3);
     }
 
     public void Reset() {
