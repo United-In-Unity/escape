@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
     Collider cl;
+    Animator anim;
     public float walkSpeed = 4.0f;
     public float jumpSpeed = 8.0f;
     // Start is called before the first frame update
@@ -13,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cl = GetComponent<Collider>();
-        print(cl.bounds.size);
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,12 +22,12 @@ public class PlayerMovement : MonoBehaviour
     {
         WalkHandler();
         JumpHandler();
-        
     }
 
     void WalkHandler() {
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
+        anim.SetBool("isWalking", Mathf.Abs(hInput + vInput) > 0.01f);
         Vector2 direction = new Vector2(hInput, vInput);
         direction.Normalize();
         rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
@@ -41,9 +42,16 @@ public class PlayerMovement : MonoBehaviour
     void JumpHandler() {
         var jumpInput = Input.GetButtonDown("Jump");
         var jumpInputReleased = Input.GetButtonUp("Jump");
+        bool grounded = isGrounded();
+        anim.SetBool("isGrounded", grounded);
+        anim.SetFloat("upVelocity", rb.velocity.y);
         if (jumpInput && isGrounded()){
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+            anim.SetTrigger("jump");
             // GameManager.instance.IncreaseLevel();
+        }
+        else {
+            anim.ResetTrigger("jump");
         }
         if (jumpInputReleased && rb.velocity.y > 0) {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y/2, rb.velocity.z);
