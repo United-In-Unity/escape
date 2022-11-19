@@ -9,7 +9,6 @@ public class PlayerManager : MonoBehaviour
     Animator anim;
     PlayerMovement pm;
 
-
     void Awake() {
         if (instance == null) {
             instance = this;

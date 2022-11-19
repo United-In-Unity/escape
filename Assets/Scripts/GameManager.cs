@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +14,9 @@ public class GameManager : MonoBehaviour
     public static int currentLevel = 1;
     public static int highestLevel = 2;
 
-    public float timer = 0f;
-    public float maxTime = 1.0f;
+    [SerializeField] private TextMeshProUGUI _gameTimer;
+    private float timer = 0f;
+    public float maxTime = 10.0f;
     public bool isLoading = false;
 
     void Awake() {
@@ -31,16 +34,23 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
-        if (isLoading) {
+        updateTimer();
+    }
+
+    void updateTimer()
+    {
+        if (isLoading)
+        {
             timer += Time.deltaTime;
-            if (timer > maxTime) {
+            if (timer > maxTime)
+            {
                 isLoading = false;
                 timer = 0f;
                 cg.alpha = 0f;
-                return;
             }
-            cg.alpha = 1f - Mathf.Abs(timer/maxTime);
+            cg.alpha = 1f - Mathf.Abs(timer / maxTime);
         }
+        _gameTimer.text = "Time Left: " + timer;
     }
 
     public void Reset() {
