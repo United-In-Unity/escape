@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 3288878710457526795}
   - component: {fileID: 6128721578643500178}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Fadein/out Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcbe7ed725e84e6eab40f3dcf9508aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alive: 1
   walkSpeed: 8
   jumpSpeed: 8
 --- !u!4 &573939136 stripped
@@ -3947,7 +3948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3581598848987613623, guid: 9c1208a79040e456da836f17f23c70f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.99
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 3581598848987613623, guid: 9c1208a79040e456da836f17f23c70f2, type: 3}
       propertyPath: m_LocalPosition.y

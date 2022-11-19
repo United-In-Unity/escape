@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     Collider cl;
     Animator anim;
+
+    public bool alive = true;
+
     public float walkSpeed = 4.0f;
     public float jumpSpeed = 8.0f;
     // Start is called before the first frame update
@@ -20,8 +23,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        WalkHandler();
-        JumpHandler();
+        if (alive){
+            WalkHandler();
+            JumpHandler();
+        }
+        if (Input.GetButtonDown("Fire1")) {
+            print("die!!!!!!!!!!!!!");
+            PlayerManager.instance.Die();
+        }
     }
 
     void WalkHandler() {
@@ -65,4 +74,6 @@ public class PlayerMovement : MonoBehaviour
         bool grounded = Physics.Raycast(bottom, new Vector3(0, -1, 0), 0.15f);
         return grounded;
     }
+
+
 }
