@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 8.0f;
     // Start is called before the first frame update
 
-    // public BoxMovement box = null;
+    public BoxMovement box = null;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -78,5 +78,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void PushHandler() {
+        var pushInput = Input.GetKeyDown(KeyCode.E);
+        if (pushInput && box != null) {
+            box.Push();
+        }
     }
 }
