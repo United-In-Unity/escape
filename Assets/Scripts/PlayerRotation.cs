@@ -25,14 +25,15 @@ public class PlayerRotation : MonoBehaviour
         else vInput = 0;
         Vector2 direction = new Vector2(hInput, vInput);
         if (direction.magnitude > 0.01) {
-            float angle = Mathf.Atan(direction.x/direction.y);
-            if (direction.y < 0) angle = angle+Mathf.PI;
-            target = (360+angle * 180 / Mathf.PI)%360;
+            float angle = (360-Mathf.Atan(direction.x/direction.y)*180/Mathf.PI)%360;
+            if (direction.y < 0) angle += 180;
+            angle = 180 - angle;
+            target = (360+angle)%360;
         }
         Vector3 current = transform.eulerAngles;
         float difference = (360+target - current.y)%360;
         float multiplier = 1f;
-        if (difference > 120) { multiplier = 1.5f; }
+        if (difference > 120) { multiplier = 2f; }
         if (Mathf.Abs(difference) < margin) {
             transform.eulerAngles = new Vector3(current.x, target, current.z);
         }
