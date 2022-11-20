@@ -13,11 +13,13 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 4.0f;
     public float jumpSpeed = 8.0f;
     // Start is called before the first frame update
+
+    // public BoxMovement box = null;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         cl = GetComponent<Collider>();
-        anim = GetComponent<Animator>();
+        anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         if (alive){
             WalkHandler();
             JumpHandler();
+            PushHandler();
         }
         if (Input.GetButtonDown("Fire1")) {
             print("die!!!!!!!!!!!!!");
@@ -36,16 +39,9 @@ public class PlayerMovement : MonoBehaviour
     void WalkHandler() {
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
-        if (Mathf.Abs(hInput) > 0.01) hInput = Mathf.Sign(hInput);
-        else hInput = 0;
-        if (Mathf.Abs(vInput) > 0.01) vInput = Mathf.Sign(vInput);
-        else vInput = 0;
-        anim.SetBool("isWalking", Mathf.Abs(hInput) + Mathf.Abs(vInput) > 0.01);
         Vector2 direction = new Vector2(hInput, vInput);
-        if (Mathf.Abs(hInput) + Mathf.Abs(vInput) > 0.1) {
-            float angle = Mathf.Atan(direction.x/direction.y);
-            if (direction.y < 0) angle = angle+Mathf.PI;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle*180/Mathf.PI, transform.eulerAngles.z);
+        anim.SetBool("isWalking",  direction.magnitude> 0.01);
+        if (direction.magnitude > 0.01) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
         }
         else {
@@ -81,5 +77,6 @@ public class PlayerMovement : MonoBehaviour
         return grounded;
     }
 
-
+    void PushHandler() {
+    }
 }
