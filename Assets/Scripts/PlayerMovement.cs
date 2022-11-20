@@ -81,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
         var pushInput = Input.GetKeyDown(KeyCode.E);
         if (pushInput && box != null) {
             box.Push();
+            anim.SetTrigger("bump");
+        }
+        else {
+            anim.ResetTrigger("bump");
         }
     }
 }
