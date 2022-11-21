@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public float maxTime = 1.0f;
     public bool isLoading = false;
 
+    int coins = 0;
+
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -68,5 +70,10 @@ public class GameManager : MonoBehaviour
         isLoading = true;
 
         PlayerManager.instance.SetPosition(new Vector3(0,1,0));
+    }
+
+    public void CollectCoin() {
+        coins += 1;
+        print("Coins: " + coins);
     }
 }
