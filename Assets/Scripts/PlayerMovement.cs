@@ -79,9 +79,19 @@ public class PlayerMovement : MonoBehaviour
 
     void PushHandler() {
         var pushInput = Input.GetKeyDown(KeyCode.E);
-        if (pushInput && box != null) {
-            box.Push();
-            anim.SetTrigger("bump");
+        Vector3 start = cl.bounds.center + 0.6f*transform.forward ;
+        float angle = anim.gameObject.transform.eulerAngles.y/180*Mathf.PI+Mathf.PI/2;
+        Vector3 direction = new Vector3(Mathf.Cos(angle),0,-Mathf.Sin(angle));
+        Ray ray = new Ray(start, direction);
+        RaycastHit hit;
+        if (pushInput && box != null && Physics.Raycast(ray, out hit)){
+            if (hit.transform.GetComponent<BoxMovement>()==box) {
+                box.Push();
+                anim.SetTrigger("bump");
+            }
+            else {
+                anim.ResetTrigger("bump");
+            }
         }
         else {
             anim.ResetTrigger("bump");
