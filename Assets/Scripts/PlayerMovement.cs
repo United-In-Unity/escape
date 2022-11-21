@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         float vInput = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(hInput, vInput);
         anim.SetBool("isWalking",  direction.magnitude> 0.01);
+        direction.Normalize();
         if (direction.magnitude > 0.01) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
         }
@@ -81,13 +82,14 @@ public class PlayerMovement : MonoBehaviour
         var pushInput = Input.GetKeyDown(KeyCode.E);
         Vector3 start = cl.bounds.center + 0.6f*transform.forward ;
         float angle = anim.gameObject.transform.eulerAngles.y/180*Mathf.PI+Mathf.PI/2;
-        Vector3 direction = new Vector3(Mathf.Cos(angle),0,-Mathf.Sin(angle));
+        Vector3 direction = new Vector3(Mathf.Cos(angle),0,-Mathf.Sin(angle)).normalized;
+        if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
         Ray ray = new Ray(start, direction);
         RaycastHit hit;
         if (pushInput && box != null && Physics.Raycast(ray, out hit)){
             if (hit.transform.GetComponent<BoxMovement>()==box) {
-                box.Push();
                 anim.SetTrigger("bump");
+                box.Push(direction);
             }
             else {
                 anim.ResetTrigger("bump");
