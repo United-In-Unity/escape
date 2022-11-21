@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
-    Collider cl;
+    CapsuleCollider cl;
     Animator anim;
 
     public bool alive = true;
@@ -13,11 +13,14 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 4.0f;
     public float jumpSpeed = 8.0f;
     // Start is called before the first frame update
+
+    public BoxMovement box = null;
+    float pushTimer = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        cl = GetComponent<Collider>();
-        anim = GetComponent<Animator>();
+        cl = GetComponent<CapsuleCollider>();
+        anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (alive){
             WalkHandler();
             JumpHandler();
+            PushHandler();
         }
         if (Input.GetButtonDown("Fire1")) {
             print("die!!!!!!!!!!!!!");
@@ -36,20 +40,16 @@ public class PlayerMovement : MonoBehaviour
     void WalkHandler() {
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
-        if (Mathf.Abs(hInput) > 0.01) hInput = Mathf.Sign(hInput);
-        else hInput = 0;
-        if (Mathf.Abs(vInput) > 0.01) vInput = Mathf.Sign(vInput);
-        else vInput = 0;
-        anim.SetBool("isWalking", Mathf.Abs(hInput) + Mathf.Abs(vInput) > 0.01);
         Vector2 direction = new Vector2(hInput, vInput);
-        if (Mathf.Abs(hInput) + Mathf.Abs(vInput) > 0.1) {
-            float angle = Mathf.Atan(direction.x/direction.y);
-            if (direction.y < 0) angle = angle+Mathf.PI;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, angle*180/Mathf.PI, transform.eulerAngles.z);
+        anim.SetBool("isWalking",  direction.magnitude> 0.01);
+        direction.Normalize();
+        if (direction.magnitude > 0.01 && !isPushing()) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
+            anim.SetTrigger("walk");
         }
         else {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            anim.ResetTrigger("walk");
         }
     }
     
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         bool grounded = isGrounded();
         anim.SetBool("isGrounded", grounded);
         anim.SetFloat("upVelocity", rb.velocity.y);
-        if (jumpInput && isGrounded()){
+        if (jumpInput && isGrounded() && !isPushing()){
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             anim.SetTrigger("jump");
             // GameManager.instance.IncreaseLevel();
@@ -81,5 +81,32 @@ public class PlayerMovement : MonoBehaviour
         return grounded;
     }
 
+    void PushHandler() {
+        var pushInput = Input.GetKeyDown(KeyCode.E);
+        Vector3 start = cl.bounds.center;
+        float angle = anim.gameObject.transform.eulerAngles.y/180*Mathf.PI+Mathf.PI/2;
+        Vector3 direction = new Vector3(Mathf.Cos(angle),0,-Mathf.Sin(angle)).normalized;
+        if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
+        Ray ray = new Ray(start, direction);
+        RaycastHit hit;
+        if (pushInput && box != null && Physics.Raycast(ray, out hit)){
+            if (hit.transform.GetComponent<BoxMovement>()==box) {
+                anim.SetTrigger("bump");
+                box.Push(direction);
+                pushTimer = 0f;
+            }
+            else {
+                anim.ResetTrigger("bump");
+            }
+        }
+        else {
+            anim.ResetTrigger("bump");
+        }
+        anim.SetBool("isBumping", isPushing());
+        pushTimer += Time.deltaTime;
+    }
 
+    public bool isPushing() {
+        return pushTimer < 1f;
+    }
 }
