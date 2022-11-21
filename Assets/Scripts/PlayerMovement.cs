@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public BoxMovement box = null;
+    float pushTimer = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -92,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
             if (hit.transform.GetComponent<BoxMovement>()==box) {
                 anim.SetTrigger("bump");
                 box.Push(direction);
+                pushTimer = 0f;
             }
             else {
                 anim.ResetTrigger("bump");
@@ -100,5 +102,7 @@ public class PlayerMovement : MonoBehaviour
         else {
             anim.ResetTrigger("bump");
         }
+        anim.SetBool("isBumping", pushTimer < 1f);
+        pushTimer += Time.deltaTime;
     }
 }
