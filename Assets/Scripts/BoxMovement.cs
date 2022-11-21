@@ -5,13 +5,13 @@ using UnityEngine;
 public class BoxMovement : MonoBehaviour
 {
     PlayerMovement pm;
-    Vector3 target;
-    public float speed = 0.02f;
+    Vector2 target;
+    public float speed = 1f;
     // Start is called before the first frame update
     void Start()
     {
         pm = PlayerManager.instance.GetComponent<PlayerMovement>();
-        target = transform.position;
+        target = new Vector2(transform.position.x, transform.position.z);
     }
 
     // Update is called once per frame
@@ -23,15 +23,17 @@ public class BoxMovement : MonoBehaviour
         else if (pm.box == this) {
             pm.box = null;
         }
-        if ((target - transform.position).magnitude>0.05f) {
-            Vector3 direction = (target - transform.position).normalized;
-            transform.position = transform.position + speed*direction;
+        Vector2 current = new Vector2(transform.position.x, transform.position.z);
+        if ((target - current).magnitude>0.05f) {
+            Vector2 direction = (target - current).normalized;
+            transform.position = transform.position + speed*new Vector3(direction.x, 0, direction.y)*Time.deltaTime;
         } else {
-            transform.position = target;
+            transform.position = new Vector3(target.x, transform.position.y, target.y);
         }
     }
 
     public void Push(Vector3 direction) {
-        target = transform.position + direction*3;
+        Vector3 temp = direction*3;
+        target = target + new Vector2(temp.x, temp.z);
     }
 }

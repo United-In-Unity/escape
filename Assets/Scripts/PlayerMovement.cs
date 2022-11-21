@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
-    Collider cl;
+    CapsuleCollider cl;
     Animator anim;
 
     public bool alive = true;
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        cl = GetComponent<Collider>();
+        cl = GetComponent<CapsuleCollider>();
         anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
@@ -44,9 +44,11 @@ public class PlayerMovement : MonoBehaviour
         direction.Normalize();
         if (direction.magnitude > 0.01) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
+            anim.SetTrigger("walk");
         }
         else {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            anim.ResetTrigger("walk");
         }
     }
     
@@ -80,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
     void PushHandler() {
         var pushInput = Input.GetKeyDown(KeyCode.E);
-        Vector3 start = cl.bounds.center + 0.6f*transform.forward ;
+        Vector3 start = cl.bounds.center;
         float angle = anim.gameObject.transform.eulerAngles.y/180*Mathf.PI+Mathf.PI/2;
         Vector3 direction = new Vector3(Mathf.Cos(angle),0,-Mathf.Sin(angle)).normalized;
         if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
