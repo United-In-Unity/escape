@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = new Vector2(hInput, vInput);
         anim.SetBool("isWalking",  direction.magnitude> 0.01);
         direction.Normalize();
-        if (direction.magnitude > 0.01) {
+        if (direction.magnitude > 0.01 && !isPushing()) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
             anim.SetTrigger("walk");
         }
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         bool grounded = isGrounded();
         anim.SetBool("isGrounded", grounded);
         anim.SetFloat("upVelocity", rb.velocity.y);
-        if (jumpInput && isGrounded()){
+        if (jumpInput && isGrounded() && !isPushing()){
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             anim.SetTrigger("jump");
             // GameManager.instance.IncreaseLevel();
@@ -102,7 +102,11 @@ public class PlayerMovement : MonoBehaviour
         else {
             anim.ResetTrigger("bump");
         }
-        anim.SetBool("isBumping", pushTimer < 1f);
+        anim.SetBool("isBumping", isPushing());
         pushTimer += Time.deltaTime;
+    }
+
+    public bool isPushing() {
+        return pushTimer < 1f;
     }
 }

@@ -9,9 +9,12 @@ public class PlayerRotation : MonoBehaviour
     public float target = 0f;
     public float margin = 1f;
 
+    PlayerMovement pm;
+
     // Start is called before the first frame update
     void Start()
     {
+        pm = transform.parent.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -24,7 +27,7 @@ public class PlayerRotation : MonoBehaviour
         if (Mathf.Abs(vInput) > 0.01) vInput = Mathf.Sign(vInput);
         else vInput = 0;
         Vector2 direction = new Vector2(hInput, vInput);
-        if (direction.magnitude > 0.01) {
+        if (direction.magnitude > 0.01 && !pm.isPushing()) {
             float angle = (360-Mathf.Atan(direction.x/direction.y)*180/Mathf.PI)%360;
             if (direction.y < 0) angle += 180;
             angle = 180 - angle;
