@@ -7,9 +7,15 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance = null;
 
+    GameObject player;
+    Animator anim;
+    PlayerMovement pm;
+
+
     void Awake() {
         if (instance == null) {
             instance = this;
+            player = this.gameObject.transform.GetChild(0).gameObject;
         }
         else if (instance != this) {
             Destroy(gameObject);
@@ -20,7 +26,8 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = player.GetComponent<Animator>();
+        pm = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -40,5 +47,7 @@ public class PlayerManager : MonoBehaviour
         // Options: MENU | RESTART
             // UI: choose levels
             // GameManager.instance.LoadLevel();
+        anim.SetBool("isDead", true);
+        pm.alive = false;
     }
 }
