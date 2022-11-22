@@ -15,7 +15,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public BoxMovement box = null;
+    public bool canPush = false;
+    
     float pushTimer = 0f;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -89,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
         Ray ray = new Ray(start, direction);
         RaycastHit hit;
-        if (pushInput && box != null && Physics.Raycast(ray, out hit)){
+        canPush = box != null && Physics.Raycast(ray, out hit);
+        if (pushInput && canPush){
             if (hit.transform.GetComponent<BoxMovement>()==box) {
                 anim.SetTrigger("bump");
                 box.Push(direction);
