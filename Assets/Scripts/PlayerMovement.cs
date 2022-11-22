@@ -31,10 +31,9 @@ public class PlayerMovement : MonoBehaviour
             JumpHandler();
             PushHandler();
         }
-        if (Input.GetButtonDown("Fire1")) {
-            print("die!!!!!!!!!!!!!");
-            // PlayerManager.instance.Die();
-        }
+        // if (Input.GetButtonDown("Fire1")) {
+        //     // PlayerManager.instance.Die();
+        // }
     }
 
     void WalkHandler() {
@@ -63,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
         if (jumpInput && isGrounded() && !isPushing()){
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             anim.SetTrigger("jump");
-            // GameManager.instance.IncreaseLevel();
         }
         else {
             anim.ResetTrigger("jump");
