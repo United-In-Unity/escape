@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance = null;
+
+    GameObject player;
     Animator anim;
     PlayerMovement pm;
 
     void Awake() {
         if (instance == null) {
             instance = this;
+            player = this.gameObject.transform.GetChild(0).gameObject;
         }
         else if (instance != this) {
             Destroy(gameObject);
@@ -22,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = player.GetComponent<Animator>();
         pm = GetComponent<PlayerMovement>();
     }
 
