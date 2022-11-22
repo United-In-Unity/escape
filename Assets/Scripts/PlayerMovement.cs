@@ -92,16 +92,11 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
         Ray ray = new Ray(start, direction);
         RaycastHit hit;
-        canPush = box != null && Physics.Raycast(ray, out hit);
+        canPush = box != null && Physics.Raycast(ray, out hit) && hit.transform.GetComponent<BoxMovement>()==box;
         if (pushInput && canPush){
-            if (hit.transform.GetComponent<BoxMovement>()==box) {
-                anim.SetTrigger("bump");
-                box.Push(direction);
-                pushTimer = 0f;
-            }
-            else {
-                anim.ResetTrigger("bump");
-            }
+            anim.SetTrigger("bump");
+            box.Push(direction);
+            pushTimer = 0f;
         }
         else {
             anim.ResetTrigger("bump");
