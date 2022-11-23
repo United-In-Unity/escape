@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         {
             timer += Time.deltaTime;
             resetTimer();
-            cg.alpha = 1f - Mathf.Abs(timer / maxTime);
+            cg.alpha = 1f - Mathf.Abs(timer / maxTime) * 10;
         }
         _gameTimer.text = "Elapsed Time: " + System.Math.Round(timer, 3);
     }
