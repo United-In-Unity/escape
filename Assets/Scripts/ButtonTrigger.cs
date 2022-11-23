@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class ButtonTrigger : MonoBehaviour
 {
+
     public TriggerMovement obj;
     // Start is called before the first frame update
+    public GameObject buttonCenter;
+
+    bool pushed = false;
     PlayerMovement pm;
     void Start()
     {
@@ -24,6 +28,10 @@ public class ButtonTrigger : MonoBehaviour
     }
 
     public void Push() {
+        if (pushed) return;
+        Vector3 current = buttonCenter.transform.position;
+        buttonCenter.transform.position = new Vector3(current.x, current.y, current.z+0.4f);
+        pushed = true;
         if (obj.tag == "Door") {
             print("OPEN THE DAMN DOOR!!!");
             obj.Trigger();
