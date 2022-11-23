@@ -95,16 +95,16 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (pushInput && box != null && Physics.Raycast(ray, out hit)){
             if (hit.transform.GetComponent<BoxMovement>()==box) {
-                anim.SetTrigger("bump");
+                anim.SetTrigger("kick");
                 box.Push(direction);
                 pushTimer = 0f;
             }
             else {
-                anim.ResetTrigger("bump");
+                anim.ResetTrigger("kick");
             }
         }
         else {
-            anim.ResetTrigger("bump");
+            anim.ResetTrigger("kick");
         }
         anim.SetBool("isBumping", isPushing());
 
