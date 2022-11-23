@@ -70,8 +70,11 @@ public class GameManager : MonoBehaviour
     }
 
     void updateHelper(){
-        if(PlayerManager.instance.PlayerCanPushBox()){
-            _gameHelper.text = "If you come in contact with boxes, press the 'E' key to push the box.";
+        if(PlayerManager.instance.PlayerCanPushBox() && !PlayerManager.instance.PlayerHasPushBox()){
+            _gameHelper.text = "Hint: If you come in contact with boxes, press the 'E' key to push the box.";
+        }
+        else if(PlayerManager.instance.PlayerCanPushButton() && !PlayerManager.instance.PlayerHasPushButton()){
+            _gameHelper.text = "Hint: If you come in contact with a door, press the 'E' key to open the door.";
         }
         else{
             _gameHelper.text = "";

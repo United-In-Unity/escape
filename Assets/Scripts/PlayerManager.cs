@@ -42,8 +42,15 @@ public class PlayerManager : MonoBehaviour
     public bool PlayerCanPushBox(){
         return pm.canPushBox;
     }
+    
+    public bool PlayerHasPushBox(){
+        return pm.hasPushedBox;
+    }
     public bool PlayerCanPushButton(){
         return pm.canPushButton;
+    }
+    public bool PlayerHasPushButton(){
+        return pm.hasPushedButton;
     }
 
     public void Die() {

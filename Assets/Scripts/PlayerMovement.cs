@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public ButtonTrigger button = null;
     public bool canPushButton = false;
 
+    public bool hasPushedButton = false;
+    public bool hasPushedBox = false;
 
 
     float pushTimer = 1f;
@@ -99,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (pushInput && canPushBox){
             anim.SetTrigger("kick");
             box.Push(direction);
+            hasPushedBox = true;
             pushTimer = 0f;
         }
         else {
@@ -111,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("bump");
             button.Push();
+            hasPushedButton = true;
             pushTimer = 0f;
         }
         else {

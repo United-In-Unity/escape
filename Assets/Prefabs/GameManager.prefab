@@ -49,7 +49,7 @@ MonoBehaviour:
   _gameTimer: {fileID: 8273135306416192428}
   _gameScore: {fileID: 4500512347607256025}
   _gameHelper: {fileID: 6315807169627415515}
-  maxTime: 10
+  maxTime: 40
   isLoading: 1
 --- !u!82 &6149970999076975982
 AudioSource:
