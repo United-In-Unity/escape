@@ -15,8 +15,12 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public BoxMovement box = null;
-    public bool canPush = false;
-    
+
+    public ButtonTrigger button = null;
+    public bool canPushButton = false;
+
+
+
     float pushTimer = 0f;
     
     void Start()
@@ -34,10 +38,9 @@ public class PlayerMovement : MonoBehaviour
             JumpHandler();
             PushHandler();
         }
-        if (Input.GetButtonDown("Fire1")) {
-            print("die!!!!!!!!!!!!!");
-            // PlayerManager.instance.Die();
-        }
+        // if (Input.GetButtonDown("Fire1")) {
+        //     // PlayerManager.instance.Die();
+        // }
     }
 
     void WalkHandler() {
@@ -66,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
         if (jumpInput && isGrounded() && !isPushing()){
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             anim.SetTrigger("jump");
-            // GameManager.instance.IncreaseLevel();
         }
         else {
             anim.ResetTrigger("jump");
@@ -92,16 +94,32 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
         Ray ray = new Ray(start, direction);
         RaycastHit hit;
-        canPush = box != null && Physics.Raycast(ray, out hit) && hit.transform.GetComponent<BoxMovement>()==box;
-        if (pushInput && canPush){
+        if (pushInput && box != null && Physics.Raycast(ray, out hit)){
+            if (hit.transform.GetComponent<BoxMovement>()==box) {
+                anim.SetTrigger("bump");
+                box.Push(direction);
+                pushTimer = 0f;
+            }
+            else {
+                anim.ResetTrigger("bump");
+            }
+        }
+        else {
+            anim.ResetTrigger("kick");
+        }
+        anim.SetBool("isBumping", isPushing());
+
+        RaycastHit hit2;
+        canPushButton = button != null && Physics.Raycast(ray, out hit2) && hit2.transform.GetComponent<ButtonTrigger>() == button;
+        if (pushInput && canPushButton)
+        {
             anim.SetTrigger("bump");
-            box.Push(direction);
+            button.Push();
             pushTimer = 0f;
         }
         else {
             anim.ResetTrigger("bump");
         }
-        anim.SetBool("isBumping", isPushing());
         pushTimer += Time.deltaTime;
     }
 

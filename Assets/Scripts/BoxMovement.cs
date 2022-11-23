@@ -6,7 +6,7 @@ public class BoxMovement : MonoBehaviour
 {
     PlayerMovement pm;
     Vector2 target;
-    public float speed = 1f;
+    public float speed = 2f;
     // Start is called before the first frame update
     void Start()
     {
