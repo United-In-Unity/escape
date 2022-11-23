@@ -39,8 +39,11 @@ public class PlayerManager : MonoBehaviour
         transform.position = p;
     }
 
-    public bool isPlayerPushing(){
+    public bool PlayerCanPushBox(){
         return pm.canPushBox;
+    }
+    public bool PlayerCanPushButton(){
+        return pm.canPushButton;
     }
 
     public void Die() {

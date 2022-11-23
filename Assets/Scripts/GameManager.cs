@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     }
 
     void updateHelper(){
-        if(PlayerManager.instance.isPlayerPushing()){
+        if(PlayerManager.instance.PlayerCanPushBox()){
             _gameHelper.text = "If you come in contact with boxes, press the 'E' key to push the box.";
         }
         else{
