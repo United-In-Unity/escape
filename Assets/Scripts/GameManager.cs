@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static int highestLevel = 2;
 
     [SerializeField] private TextMeshProUGUI _gameTimer;
+    [SerializeField] private TextMeshProUGUI _gameScore;
     private float timer = 0f;
     public float maxTime = 10.0f;
     public bool isLoading = false;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         updateTimer();
+        updateScore();
     }
 
     void updateTimer()
@@ -44,15 +46,24 @@ public class GameManager : MonoBehaviour
         if (isLoading)
         {
             timer += Time.deltaTime;
-            if (timer > maxTime)
-            {
-                isLoading = false;
-                timer = 0f;
-                cg.alpha = 0f;
-            }
+            resetTimer();
             cg.alpha = 1f - Mathf.Abs(timer / maxTime);
         }
-        _gameTimer.text = "Time Left: " + System.Math.Round(timer, 3);
+        _gameTimer.text = "Elapsed Time: " + System.Math.Round(timer, 3);
+    }
+
+    void updateScore()
+    {
+        _gameScore.text = "Score: " + coins;
+    }
+
+    void resetTimer(){
+        if (timer > maxTime)
+        {
+            isLoading = false;
+            timer = 0f;
+            cg.alpha = 0f;
+        }
     }
 
     public void Reset() {
