@@ -11,7 +11,6 @@ public class PlayerManager : MonoBehaviour
     Animator anim;
     PlayerMovement pm;
 
-
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -38,6 +37,20 @@ public class PlayerManager : MonoBehaviour
 
     public void SetPosition(Vector3 p) {
         transform.position = p;
+    }
+
+    public bool PlayerCanPushBox(){
+        return pm.canPushBox;
+    }
+    
+    public bool PlayerHasPushBox(){
+        return pm.hasPushedBox;
+    }
+    public bool PlayerCanPushButton(){
+        return pm.canPushButton;
+    }
+    public bool PlayerHasPushButton(){
+        return pm.hasPushedButton;
     }
 
     public void Die() {

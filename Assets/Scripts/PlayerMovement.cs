@@ -15,13 +15,17 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public BoxMovement box = null;
+    public bool canPushBox = false;
 
     public ButtonTrigger button = null;
     public bool canPushButton = false;
 
+    public bool hasPushedButton = false;
+    public bool hasPushedBox = false;
 
 
-    float pushTimer = 0f;
+    float pushTimer = 1f;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -93,20 +97,16 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
         Ray ray = new Ray(start, direction);
         RaycastHit hit;
-        if (pushInput && box != null && Physics.Raycast(ray, out hit)){
-            if (hit.transform.GetComponent<BoxMovement>()==box) {
-                anim.SetTrigger("kick");
-                box.Push(direction);
-                pushTimer = 0f;
-            }
-            else {
-                anim.ResetTrigger("kick");
-            }
+        canPushBox = box != null && Physics.Raycast(ray, out hit) && hit.transform.GetComponent<BoxMovement>()==box;
+        if (pushInput && canPushBox){
+            anim.SetTrigger("kick");
+            box.Push(direction);
+            hasPushedBox = true;
+            pushTimer = 0f;
         }
         else {
             anim.ResetTrigger("kick");
         }
-        anim.SetBool("isBumping", isPushing());
 
         RaycastHit hit2;
         canPushButton = button != null && Physics.Raycast(ray, out hit2) && hit2.transform.GetComponent<ButtonTrigger>() == button;
@@ -114,12 +114,14 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("bump");
             button.Push();
+            hasPushedButton = true;
             pushTimer = 0f;
         }
         else {
             anim.ResetTrigger("bump");
         }
         pushTimer += Time.deltaTime;
+        anim.SetBool("isBumping", isPushing());
     }
 
     public bool isPushing() {

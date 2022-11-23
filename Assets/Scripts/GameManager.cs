@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +14,12 @@ public class GameManager : MonoBehaviour
     public static int currentLevel = 1;
     public static int highestLevel = 2;
 
-    public float timer = 0f;
-    public float maxTime = 1.0f;
+    [SerializeField] private TextMeshProUGUI _gameTimer;
+    [SerializeField] private TextMeshProUGUI _gameScore;
+    [SerializeField] private TextMeshProUGUI _gameHelper;
+
+    private float timer = 0f;
+    public float maxTime = 10.0f;
     public bool isLoading = false;
 
     int coins = 0;
@@ -33,16 +39,47 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
-        if (isLoading) {
+        updateTimer();
+        updateScore();
+        updateHelper();
+    }
+
+    void updateTimer()
+    {
+        if (isLoading)
+        {
             timer += Time.deltaTime;
-            if (timer > maxTime) {
-                isLoading = false;
-                timer = 0f;
-                cg.alpha = 0f;
-                return;
-            }
-            cg.alpha = 1f - Mathf.Abs(timer/maxTime);
+            resetTimer();
+            cg.alpha = 1f - Mathf.Abs(timer / maxTime) * 10;
         }
+        _gameTimer.text = "Elapsed Time: " + System.Math.Round(timer, 3);
+    }
+
+    void updateScore()
+    {
+        _gameScore.text = "Score: " + coins;
+    }
+
+    void resetTimer(){
+        if (timer > maxTime)
+        {
+            isLoading = false;
+            timer = 0f;
+            cg.alpha = 0f;
+        }
+    }
+
+    void updateHelper(){
+        if(PlayerManager.instance.PlayerCanPushBox() && !PlayerManager.instance.PlayerHasPushBox()){
+            _gameHelper.text = "Hint: If you come in contact with boxes, press the 'E' key to push the box.";
+        }
+        else if(PlayerManager.instance.PlayerCanPushButton() && !PlayerManager.instance.PlayerHasPushButton()){
+            _gameHelper.text = "Hint: If you come in contact with a door, press the 'E' key to open the door.";
+        }
+        else{
+            _gameHelper.text = "";
+        }
+
     }
 
     public void Reset() {
