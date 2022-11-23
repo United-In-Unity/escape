@@ -110,9 +110,6 @@ public class PlayerMovement : MonoBehaviour
 
         RaycastHit hit2;
         canPushButton = button != null && Physics.Raycast(ray, out hit2) && hit2.transform.GetComponent<ButtonTrigger>() == button;
-        if (pushInput) {
-            print("ppp");
-        }
         if (pushInput && canPushButton)
         {
             anim.SetTrigger("bump");
