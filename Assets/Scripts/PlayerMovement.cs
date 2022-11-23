@@ -15,6 +15,12 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public BoxMovement box = null;
+
+    public ButtonTrigger button = null;
+    public bool canPushButton = false;
+
+
+
     float pushTimer = 0f;
     void Start()
     {
@@ -101,6 +107,21 @@ public class PlayerMovement : MonoBehaviour
             anim.ResetTrigger("bump");
         }
         anim.SetBool("isBumping", isPushing());
+
+        RaycastHit hit2;
+        canPushButton = button != null && Physics.Raycast(ray, out hit2) && hit2.transform.GetComponent<ButtonTrigger>() == button;
+        if (pushInput) {
+            print("ppp");
+        }
+        if (pushInput && canPushButton)
+        {
+            anim.SetTrigger("bump");
+            button.Push();
+            pushTimer = 0f;
+        }
+        else {
+            anim.ResetTrigger("bump");
+        }
         pushTimer += Time.deltaTime;
     }
 
