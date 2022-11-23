@@ -591,6 +591,10 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6315807169627415515, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8273135306416192428, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
       propertyPath: m_enableWordWrapping
       value: 0
@@ -980,7 +984,8 @@ MonoBehaviour:
   walkSpeed: 8
   jumpSpeed: 8
   box: {fileID: 0}
-  canPush: 0
+  button: {fileID: 0}
+  canPushButton: 0
 --- !u!4 &573939136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4665364262746750847, guid: 58f7b392c93e44c34b39ebf29d09d5de, type: 3}
@@ -3978,6 +3983,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8161374619043172944, guid: ee51ad234b11f44c09976fe821113cbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 23444455, guid: 9c1208a79040e456da836f17f23c70f2, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4053,10 +4062,6 @@ PrefabInstance:
     - target: {fileID: 4251316142329205517, guid: 9c1208a79040e456da836f17f23c70f2, type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8161374619043172944, guid: ee51ad234b11f44c09976fe821113cbe, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee51ad234b11f44c09976fe821113cbe, type: 3}

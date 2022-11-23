@@ -39,6 +39,10 @@ public class PlayerManager : MonoBehaviour
         transform.position = p;
     }
 
+    public bool isPlayerPushing(){
+        return pm.canPushBox;
+    }
+
     public void Die() {
         print("Player is dead!!! Dead animation is playing...");
         // TODO: Dead animation 

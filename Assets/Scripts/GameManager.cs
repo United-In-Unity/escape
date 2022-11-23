@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _gameTimer;
     [SerializeField] private TextMeshProUGUI _gameScore;
+    [SerializeField] private TextMeshProUGUI _gameHelper;
+
     private float timer = 0f;
     public float maxTime = 10.0f;
     public bool isLoading = false;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     void Update() {
         updateTimer();
         updateScore();
+        updateHelper();
     }
 
     void updateTimer()
@@ -64,6 +67,16 @@ public class GameManager : MonoBehaviour
             timer = 0f;
             cg.alpha = 0f;
         }
+    }
+
+    void updateHelper(){
+        if(PlayerManager.instance.isPlayerPushing()){
+            _gameHelper.text = "If you come in contact with boxes, press the 'E' key to push the box.";
+        }
+        else{
+            _gameHelper.text = "";
+        }
+
     }
 
     public void Reset() {
