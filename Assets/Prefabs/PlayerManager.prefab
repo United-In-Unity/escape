@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alive: 1
   walkSpeed: 4
-  jumpSpeed: 8
+  jumpSpeed: 6
   box: {fileID: 0}
   canPushBox: 0
   button: {fileID: 0}
