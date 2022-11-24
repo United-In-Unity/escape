@@ -185,7 +185,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: upVelocity
-    m_EventTreshold: 0
+    m_EventTreshold: 0.001
   - m_ConditionMode: 2
     m_ConditionEvent: isBumping
     m_EventTreshold: 0
@@ -518,7 +518,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 340, y: 290, z: 0}
-  m_EntryPosition: {x: 80, y: 260, z: 0}
+  m_EntryPosition: {x: 100, y: 290, z: 0}
   m_ExitPosition: {x: 90, y: 350, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 970647712596161393}
