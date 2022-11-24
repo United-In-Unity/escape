@@ -19,40 +19,57 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameHelper;
 
     private float timer = 0f;
-    public float maxTime = 10.0f;
-    public bool isLoading = false;
+    public float maxTime = 1000.0f;
+    private float loadingTimer = 0f;
+    private float loadingTime = 1f;
+    public bool isLoading = true;
 
     int coins = 0;
 
-    void Awake() {
-        if (instance == null) {
+    void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
         }
-        else if (instance != this) {
+        else if (instance != this)
+        {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start() {
+    void Start()
+    {
         cg = this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<CanvasGroup>();
     }
 
-    void Update() {
+    void Update()
+    {
         updateTimer();
         updateScore();
         updateHelper();
+        updateLoading();
     }
 
     void updateTimer()
     {
+        timer += Time.deltaTime;
+        _gameTimer.text = "Elapsed Time: " + System.Math.Round(timer, 3);
+    }
+    void updateLoading() {
+        loadingTimer += Time.deltaTime;
         if (isLoading)
         {
-            timer += Time.deltaTime;
-            resetTimer();
-            cg.alpha = 1f - Mathf.Abs(timer / maxTime) * 10;
+            if (loadingTimer > loadingTime)
+            {
+                isLoading = false;
+                loadingTimer = 0f;
+                cg.alpha = 0f;
+                return;
+            }
+            cg.alpha = 1f - loadingTimer / loadingTime;
         }
-        _gameTimer.text = "Elapsed Time: " + System.Math.Round(timer, 3);
     }
 
     void updateScore()
@@ -60,34 +77,32 @@ public class GameManager : MonoBehaviour
         _gameScore.text = "Score: " + coins;
     }
 
-    void resetTimer(){
-        if (timer > maxTime)
+    void updateHelper()
+    {
+        if (PlayerManager.instance.PlayerCanPushBox() && !PlayerManager.instance.PlayerHasPushBox())
         {
-            isLoading = false;
-            timer = 0f;
-            cg.alpha = 0f;
-        }
-    }
-
-    void updateHelper(){
-        if(PlayerManager.instance.PlayerCanPushBox() && !PlayerManager.instance.PlayerHasPushBox()){
             _gameHelper.text = "Hint: If you come in contact with boxes, press the 'E' key to push the box.";
         }
-        else if(PlayerManager.instance.PlayerCanPushButton() && !PlayerManager.instance.PlayerHasPushButton()){
+        else if (PlayerManager.instance.PlayerCanPushButton() && !PlayerManager.instance.PlayerHasPushButton())
+        {
             _gameHelper.text = "Hint: If you come in contact with a door, press the 'E' key to open the door.";
         }
-        else{
+        else
+        {
             _gameHelper.text = "";
         }
 
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         currentLevel = 1;
         LoadLevel();
     }
-    public void IncreaseLevel() {
-        if (currentLevel < highestLevel) {
+    public void IncreaseLevel()
+    {
+        if (currentLevel < highestLevel)
+        {
             currentLevel++;
         }
         else
@@ -97,19 +112,24 @@ public class GameManager : MonoBehaviour
         LoadLevel();
     }
 
-    public void LoadLevel(string name = "default") {
-        if (name=="default") {
+    public void LoadLevel(string name = "default")
+    {
+        if (name == "default")
+        {
             SceneManager.LoadScene("Level" + currentLevel);
         }
-        else {
+        else
+        {
             SceneManager.LoadScene(name);
         }
         isLoading = true;
-
-        PlayerManager.instance.SetPosition(new Vector3(0,1,0));
+        timer = 0f;
+        loadingTimer = 0f;
+        PlayerManager.instance.SetPosition(new Vector3(0, 1, 0));
     }
 
-    public void CollectCoin() {
+    public void CollectCoin()
+    {
         coins += 1;
         print("Coins: " + coins);
     }
