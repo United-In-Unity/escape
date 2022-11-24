@@ -149,6 +149,11 @@ MonoBehaviour:
   walkSpeed: 4
   jumpSpeed: 8
   box: {fileID: 0}
+  canPushBox: 0
+  button: {fileID: 0}
+  canPushButton: 0
+  hasPushedButton: 0
+  hasPushedBox: 0
 --- !u!136 &1462427328423191106
 CapsuleCollider:
   m_ObjectHideFlags: 0
