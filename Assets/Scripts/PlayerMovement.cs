@@ -121,7 +121,8 @@ public class PlayerMovement : MonoBehaviour
             anim.ResetTrigger("bump");
         }
         pushTimer += Time.deltaTime;
-        anim.SetBool("isBumping", isPushing());
+        bool playerIsPushing = isPushing();
+        anim.SetBool("isBumping", playerIsPushing);
     }
 
     public bool isPushing() {

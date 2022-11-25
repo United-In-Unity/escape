@@ -11,6 +11,8 @@ public class PlayerRotation : MonoBehaviour
 
     PlayerMovement pm;
 
+    float previousDifference = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,14 +38,27 @@ public class PlayerRotation : MonoBehaviour
         Vector3 current = transform.eulerAngles;
         float difference = (360+target - current.y)%360;
         float multiplier = 1f;
-        if (difference > 120) { multiplier = 2f; }
-        if (Mathf.Abs(difference) < margin) {
+        if (difference > 120 && difference < 240) { multiplier = 2f; }
+        if (difference < margin || (360-difference) < margin) {
             transform.eulerAngles = new Vector3(current.x, target, current.z);
+            previousDifference = 0;
         }
         else if (difference<180) {
+            if (previousDifference < 0) {
+                transform.eulerAngles = new Vector3(current.x, target, current.z);
+                previousDifference = 0;
+                return;
+            }
+            previousDifference = 1;
             transform.eulerAngles = new Vector3(current.x, (360+current.y+speed*multiplier*Time.deltaTime)%360, current.z);
         }
         else {
+            if (previousDifference > 0) {
+                transform.eulerAngles = new Vector3(current.x, target, current.z);
+                previousDifference = 0;
+                return;
+            }
+            previousDifference = -1;
             transform.eulerAngles = new Vector3(current.x, (360+current.y-speed*multiplier*Time.deltaTime)%360, current.z);
         }
     }
