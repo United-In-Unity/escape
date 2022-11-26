@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rb;
+    public Rigidbody rb;
     CapsuleCollider cl;
     Animator anim;
 
@@ -40,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
             WalkHandler();
             JumpHandler();
             PushHandler();
+        }
+        else {
+            if (!PlayerManager.instance.isDying){
+                RebornHandler();
+            }
         }
         // if (Input.GetButtonDown("Fire1")) {
         //     // PlayerManager.instance.Die();
@@ -131,5 +136,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopMoving() {
         rb.velocity = new Vector3(0,0,0);
+        rb.isKinematic = true;
+    }
+
+    void RebornHandler() {
+        var pushInput = Input.GetKeyDown(KeyCode.R);
+        if (pushInput) {
+            PlayerManager.instance.Reborn();
+            rb.isKinematic = false;
+        }
     }
 }
