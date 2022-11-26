@@ -129,11 +129,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ec7de3b85b0ed634ca5e2122ed424b02, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8c9f138fdd2744496b4dff0c2d152a7e, type: 2}
+      objectReference: {fileID: 2100000, guid: ae9225bcb84bb405ba74449221636229, type: 2}
     - target: {fileID: -7511558181221131132, guid: ec7de3b85b0ed634ca5e2122ed424b02, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 8c9f138fdd2744496b4dff0c2d152a7e, type: 2}
+      objectReference: {fileID: 2100000, guid: ae9225bcb84bb405ba74449221636229, type: 2}
     - target: {fileID: 919132149155446097, guid: ec7de3b85b0ed634ca5e2122ed424b02, type: 3}
       propertyPath: m_Name
       value: CoinCenter
