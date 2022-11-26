@@ -995,26 +995,6 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
-      propertyPath: orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
-      propertyPath: field of view
-      value: 57
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
-      propertyPath: m_FOVAxisMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
-      propertyPath: far clip plane
-      value: 1000.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
       propertyPath: m_AllowDynamicResolution
       value: 0
       objectReference: {fileID: 0}
