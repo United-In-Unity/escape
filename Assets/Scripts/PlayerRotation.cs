@@ -54,7 +54,7 @@ public class PlayerRotation : MonoBehaviour
         }
         else if (difference < 180)
         {
-            if (previousDifference < 0)
+            if (previousDifference < 0 && difference < 10)
             {
                 transform.eulerAngles = new Vector3(current.x, target, current.z);
                 previousDifference = 0;
@@ -65,7 +65,7 @@ public class PlayerRotation : MonoBehaviour
         }
         else
         {
-            if (previousDifference > 0)
+            if (previousDifference > 0 && difference < 10)
             {
                 transform.eulerAngles = new Vector3(current.x, target, current.z);
                 previousDifference = 0;
