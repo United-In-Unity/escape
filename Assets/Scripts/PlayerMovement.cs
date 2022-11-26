@@ -92,8 +92,8 @@ public class PlayerMovement : MonoBehaviour
     void PushHandler() {
         var pushInput = Input.GetKeyDown(KeyCode.E);
         Vector3 start = cl.bounds.center;
-        float angle = anim.gameObject.transform.eulerAngles.y/180*Mathf.PI+Mathf.PI/2;
-        Vector3 direction = new Vector3(Mathf.Cos(angle),0,-Mathf.Sin(angle)).normalized;
+        float angle = -(anim.gameObject.GetComponent<PlayerRotation>().angle-90)/180*Mathf.PI;
+        Vector3 direction = new Vector3(Mathf.Cos(angle),0,Mathf.Sin(angle)).normalized;
         if (Mathf.Abs(direction.x) + Mathf.Abs(direction.z) > 1.1f) return;
         Ray ray = new Ray(start, direction);
         RaycastHit hit;
