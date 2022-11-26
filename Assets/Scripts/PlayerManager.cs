@@ -53,6 +53,10 @@ public class PlayerManager : MonoBehaviour
         return pm.hasPushedButton;
     }
 
+    public bool PlayerHasDied(){
+        return pm.alive;
+    }
+
     public void Die() {
         print("Player is dead!!! Dead animation is playing...");
         // TODO: Dead animation 

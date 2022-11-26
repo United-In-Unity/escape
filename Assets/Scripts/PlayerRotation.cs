@@ -8,6 +8,8 @@ public class PlayerRotation : MonoBehaviour
     public float speed = 200f;
     public float target = 0f;
     public float margin = 1f;
+    
+    public float angle = 0;
 
     PlayerMovement pm;
 
@@ -37,13 +39,12 @@ public class PlayerRotation : MonoBehaviour
         Vector2 direction = new Vector2(hInput, vInput);
         if (direction.magnitude > 0.01 && !pm.isPushing())
         {
-            float angle = (360 - Mathf.Atan(direction.x / direction.y) * 180 / Mathf.PI) % 360;
+            angle = (360 - Mathf.Atan(direction.x / direction.y) * 180 / Mathf.PI) % 360;
             if (direction.y < 0) angle += 180;
-            angle = 180 - angle;
-            target = (360 + angle) % 360;
+            target = angle = (360 - angle) % 360;
         }
         Vector3 current = transform.eulerAngles;
-        float difference = (360 + target - current.y) % 360;
+        float difference = (720 + target - current.y) % 360;
         float multiplier = 1f;
         if (difference > 120 && difference < 240) { multiplier = 2f; }
         if (difference < margin || (360 - difference) < margin)
@@ -53,7 +54,7 @@ public class PlayerRotation : MonoBehaviour
         }
         else if (difference < 180)
         {
-            if (previousDifference < 0)
+            if (previousDifference < 0 && difference < 10)
             {
                 transform.eulerAngles = new Vector3(current.x, target, current.z);
                 previousDifference = 0;
@@ -64,7 +65,7 @@ public class PlayerRotation : MonoBehaviour
         }
         else
         {
-            if (previousDifference > 0)
+            if (previousDifference > 0 && difference < 10)
             {
                 transform.eulerAngles = new Vector3(current.x, target, current.z);
                 previousDifference = 0;
