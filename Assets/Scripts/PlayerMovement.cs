@@ -128,4 +128,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isPushing() {
         return pushTimer < 1f;
     }
+
+    public void StopMoving() {
+        rb.velocity = new Vector3(0,0,0);
+    }
 }

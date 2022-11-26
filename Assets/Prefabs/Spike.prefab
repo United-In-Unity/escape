@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0019f775c24b6b84fa8d4dfeb05be95a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 355ce2a798a07254f972272c63514448, type: 2}
     - target: {fileID: 919132149155446097, guid: 0019f775c24b6b84fa8d4dfeb05be95a, type: 3}
       propertyPath: m_Name
       value: Spike

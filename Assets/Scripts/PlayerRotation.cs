@@ -22,6 +22,12 @@ public class PlayerRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!pm.alive)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            return;
+        }
+
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
         if (Mathf.Abs(hInput) > 0.01) hInput = Mathf.Sign(hInput);
@@ -29,37 +35,43 @@ public class PlayerRotation : MonoBehaviour
         if (Mathf.Abs(vInput) > 0.01) vInput = Mathf.Sign(vInput);
         else vInput = 0;
         Vector2 direction = new Vector2(hInput, vInput);
-        if (direction.magnitude > 0.01 && !pm.isPushing()) {
-            float angle = (360-Mathf.Atan(direction.x/direction.y)*180/Mathf.PI)%360;
+        if (direction.magnitude > 0.01 && !pm.isPushing())
+        {
+            float angle = (360 - Mathf.Atan(direction.x / direction.y) * 180 / Mathf.PI) % 360;
             if (direction.y < 0) angle += 180;
             angle = 180 - angle;
-            target = (360+angle)%360;
+            target = (360 + angle) % 360;
         }
         Vector3 current = transform.eulerAngles;
-        float difference = (360+target - current.y)%360;
+        float difference = (360 + target - current.y) % 360;
         float multiplier = 1f;
         if (difference > 120 && difference < 240) { multiplier = 2f; }
-        if (difference < margin || (360-difference) < margin) {
+        if (difference < margin || (360 - difference) < margin)
+        {
             transform.eulerAngles = new Vector3(current.x, target, current.z);
             previousDifference = 0;
         }
-        else if (difference<180) {
-            if (previousDifference < 0) {
+        else if (difference < 180)
+        {
+            if (previousDifference < 0)
+            {
                 transform.eulerAngles = new Vector3(current.x, target, current.z);
                 previousDifference = 0;
                 return;
             }
             previousDifference = 1;
-            transform.eulerAngles = new Vector3(current.x, (360+current.y+speed*multiplier*Time.deltaTime)%360, current.z);
+            transform.eulerAngles = new Vector3(current.x, (360 + current.y + speed * multiplier * Time.deltaTime) % 360, current.z);
         }
-        else {
-            if (previousDifference > 0) {
+        else
+        {
+            if (previousDifference > 0)
+            {
                 transform.eulerAngles = new Vector3(current.x, target, current.z);
                 previousDifference = 0;
                 return;
             }
             previousDifference = -1;
-            transform.eulerAngles = new Vector3(current.x, (360+current.y-speed*multiplier*Time.deltaTime)%360, current.z);
+            transform.eulerAngles = new Vector3(current.x, (360 + current.y - speed * multiplier * Time.deltaTime) % 360, current.z);
         }
     }
 }

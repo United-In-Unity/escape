@@ -29,8 +29,9 @@ public class ButtonTrigger : MonoBehaviour
 
     public void Push() {
         if (pushed) return;
-        Vector3 current = buttonCenter.transform.position;
-        buttonCenter.transform.position = new Vector3(current.x, current.y, current.z+0.4f);
+        float angle = -transform.eulerAngles.y-90;
+        Vector3 offset = new Vector3(Mathf.Cos(angle/180*Mathf.PI),0,Mathf.Sin(angle/180*Mathf.PI));
+        buttonCenter.transform.position += offset*0.2f;
         pushed = true;
         if (obj.tag == "Door") {
             print("OPEN THE DAMN DOOR!!!");
