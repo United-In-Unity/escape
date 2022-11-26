@@ -44,7 +44,7 @@ public class PlayerRotation : MonoBehaviour
             target = angle = (360 - angle) % 360;
         }
         Vector3 current = transform.eulerAngles;
-        float difference = (360 + target - current.y) % 360;
+        float difference = (720 + target - current.y) % 360;
         float multiplier = 1f;
         if (difference > 120 && difference < 240) { multiplier = 2f; }
         if (difference < margin || (360 - difference) < margin)
