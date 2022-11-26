@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
         {
             _gameHelper.text = "Hint: If you come in contact with a door, press the 'E' key to open the door.";
         }
+        // else if(PlayerManager.instance.PlayerHasDied()){
+        //     _gameHelper.text = ""
+        // }
         else
         {
             _gameHelper.text = "";

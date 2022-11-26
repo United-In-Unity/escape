@@ -962,6 +962,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3496152852722679442, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: walkSpeed
+      value: 4.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452541, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: field of view
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: far clip plane
+      value: 1000.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308552091249452543, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7308552091821956746, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
       propertyPath: m_RootOrder
       value: 3
