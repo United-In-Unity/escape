@@ -15,12 +15,16 @@ public class PlayerManager : MonoBehaviour
     float deathTimer = 1f;
     float intensity;
     
+    public GameObject character;
+    public Light backup;
     public Renderer point;
     public Renderer leg1;
     public Renderer leg2;
     public Renderer leg3;
     public Renderer leg4;
     public Light halo;
+
+    public GameObject explosion;
 
     void Awake() {
         if (instance == null) {
@@ -53,8 +57,14 @@ public class PlayerManager : MonoBehaviour
             leg3.material.SetColor("_EmissionColor", customColor);
             leg4.material.SetColor("_EmissionColor", customColor);
             halo.intensity = intensity - deathTimer / deathTime * intensity / 2;
+            deathTimer += Time.deltaTime;
+            player.transform.position += new Vector3(0, Time.deltaTime, 0);
+            if (deathTimer >= deathTime) {
+                Instantiate(explosion, player.transform.position, Quaternion.identity);
+                character.SetActive(false);
+                backup.enabled = true;
+            }
         }
-        deathTimer += Time.deltaTime;
     }
 
     public void SetPosition(Vector3 p) {
