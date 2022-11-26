@@ -62,5 +62,6 @@ public class PlayerManager : MonoBehaviour
             // GameManager.instance.LoadLevel();
         anim.SetBool("isDead", true);
         pm.alive = false;
+        pm.StopMoving();
     }
 }

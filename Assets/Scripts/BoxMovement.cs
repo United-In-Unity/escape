@@ -33,7 +33,7 @@ public class BoxMovement : MonoBehaviour
     }
 
     public void Push(Vector3 direction) {
-        Vector3 temp = direction*3;
+        Vector3 temp = direction*transform.localScale.x;
         target = target + new Vector2(temp.x, temp.z);
     }
 }

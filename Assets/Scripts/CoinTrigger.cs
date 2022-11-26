@@ -19,7 +19,7 @@ public class CoinTrigger : MonoBehaviour
     void OnTriggerEnter(Collider cl) {
         if (cl.gameObject.tag == "Player") {
             GameManager.instance.CollectCoin();
-            Destroy(transform.parent.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
