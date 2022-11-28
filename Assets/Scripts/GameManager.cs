@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     CanvasGroup cg;
 
     public static int currentLevel = 1;
-    public static int highestLevel = 2;
+    public static int highestLevel = 1;
 
     [SerializeField] private TextMeshProUGUI _gameTimer;
     [SerializeField] private TextMeshProUGUI _gameScore;
@@ -110,24 +110,14 @@ public class GameManager : MonoBehaviour
         if (currentLevel < highestLevel)
         {
             currentLevel++;
+            LoadLevel("Level" + currentLevel);
         }
-        else
-        {
-            currentLevel = 1;
-        }
-        LoadLevel();
     }
 
     public void LoadLevel(string name = "default")
     {
-        if (name == "default")
-        {
-            SceneManager.LoadScene("Level" + currentLevel);
-        }
-        else
-        {
-            SceneManager.LoadScene(name);
-        }
+        SceneManager.LoadScene(name);
+        if (name == "Credits") return;
         isLoading = true;
         timer = 0f;
         loadingTimer = 0f;
