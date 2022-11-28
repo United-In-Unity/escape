@@ -104,17 +104,15 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void Die() {
-        print("Player is dead!!! Dead animation is playing...");
-        // TODO: Dead animation 
-        // TODO: GAME UI for options
-        // Options: MENU | RESTART
-            // UI: choose levels
-            // GameManager.instance.LoadLevel();
-        anim.SetBool("isDead", true);
-        deathTimer = 0f;
-        pm.alive = false;
-        pm.StopMoving();
-        isDying = true;
+        if (pm.alive) {
+            GameManager.instance.gs.PlayerDie();
+            print("Player is dead!!! Dead animation is playing...");
+            anim.SetBool("isDead", true);
+            deathTimer = 0f;
+            pm.alive = false;
+            pm.StopMoving();
+            isDying = true;
+        }
     }
 
     public void Reborn() {

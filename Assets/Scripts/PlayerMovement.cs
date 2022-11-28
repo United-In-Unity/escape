@@ -95,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void PushHandler() {
+        pushTimer += Time.deltaTime;
+        if (isPushing()) return;
         var pushInput = Input.GetKeyDown(KeyCode.E);
         Vector3 start = cl.bounds.center;
         float angle = -(anim.gameObject.GetComponent<PlayerRotation>().angle-90)/180*Mathf.PI;
@@ -108,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
             box.Push(direction);
             hasPushedBox = true;
             pushTimer = 0f;
+            GameManager.instance.gs.PlayerBump();
         }
         else {
             anim.ResetTrigger("kick");
@@ -121,11 +124,11 @@ public class PlayerMovement : MonoBehaviour
             button.Push();
             hasPushedButton = true;
             pushTimer = 0f;
+            GameManager.instance.gs.ClickButton();
         }
         else {
             anim.ResetTrigger("bump");
         }
-        pushTimer += Time.deltaTime;
         bool playerIsPushing = isPushing();
         anim.SetBool("isBumping", playerIsPushing);
     }

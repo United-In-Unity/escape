@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    public GameSound gs;
+
     CanvasGroup cg;
 
     public static int currentLevel = 1;
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         cg = this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<CanvasGroup>();
+        gs = GetComponent<GameSound>();
     }
 
     void Update()
@@ -134,6 +137,7 @@ public class GameManager : MonoBehaviour
     public void CollectCoin()
     {
         coins += 1;
+        gs.CollectCoin();
         print("Coins: " + coins);
     }
 }
