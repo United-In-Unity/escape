@@ -19,8 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameTimer;
     [SerializeField] private TextMeshProUGUI _gameScore;
     [SerializeField] private TextMeshProUGUI _gameHelper;
+    [SerializeField] private TextMeshProUGUI _gameDeathTimer;
+    [SerializeField] private TextMeshProUGUI _gameDeathHelper;
 
     private float timer = 0f;
+    private float maxDeathTime = 6f;
     public float maxTime = 1000.0f;
     private float loadingTimer = 0f;
     private float loadingTime = 1f;
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour
         updateScore();
         updateHelper();
         updateLoading();
+        updateDeathTimer();
     }
 
     void updateTimer()
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
             }
             cg.alpha = 1f - loadingTimer / loadingTime;
         }
+        
     }
 
     void updateScore()
@@ -90,14 +95,28 @@ public class GameManager : MonoBehaviour
         {
             _gameHelper.text = "Hint: If you come in contact with a door, press the 'E' key to open the door.";
         }
-        // else if(PlayerManager.instance.PlayerHasDied()){
-        //     _gameHelper.text = ""
-        // }
         else
         {
             _gameHelper.text = "";
         }
 
+    }
+
+    void updateDeathTimer(){
+        if(PlayerManager.instance.PlayerHasDied()){
+            maxDeathTime -= Time.deltaTime;
+            _gameDeathHelper.text = "YOU HAVE DIED.";
+            _gameScore.text = "";
+            coins = 0;
+            timer = 0;
+            _gameTimer.text = "";
+            _gameDeathTimer.text = "Respawining in " + System.Math.Round(maxDeathTime, 0) + " seconds. Or Exit with 'ESC' key.";
+        }
+        else{
+            _gameDeathHelper.text = "";
+            _gameDeathTimer.text = "";
+            maxDeathTime = 6f;
+        }
     }
 
     public void Reset()

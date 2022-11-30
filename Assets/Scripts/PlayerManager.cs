@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject explosion;
     float explosionTime;
     float deathTime = 1f;
-    float deathTimer;
+    public float deathTimer;
     float intensity;
 
     public bool isDying = false;
@@ -101,7 +101,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public bool PlayerHasDied(){
-        return pm.alive;
+        return !pm.alive;
     }
 
     public void Die() {
