@@ -77,6 +77,7 @@ public class PlayerManager : MonoBehaviour
             else if (deathTimer >= deathTime+explosionTime) {
                 isExploding = false;
                 isDying = false;
+                Reborn();
             }
         }
     }
@@ -122,6 +123,7 @@ public class PlayerManager : MonoBehaviour
         character.SetActive(true);
         backup.enabled = false;
         SetPosition(new Vector3(0,1,0));
+        pm.rb.isKinematic = false;
         float r, b, g, a = r = b = g = 1f;
         Color customColor = new Color(r, b, g, a);
         point.material.SetColor("_EmissionColor", customColor);

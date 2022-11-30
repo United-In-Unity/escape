@@ -62,10 +62,9 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude > 0.01 && !isPushing()) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
             anim.SetTrigger("walk");
-            if (!walking) {
+            if (isGrounded()&&!walking) {
                 walking = true;
                 PlayerManager.instance.GetComponent<AudioSource>().Play(0);
-
             }
         }
         else {
@@ -75,6 +74,10 @@ public class PlayerMovement : MonoBehaviour
                 walking = false;
                 PlayerManager.instance.GetComponent<AudioSource>().Pause();
             }
+        }
+        if (!isGrounded()) {
+            walking = false;
+            PlayerManager.instance.GetComponent<AudioSource>().Pause();
         }
     }
     
@@ -151,13 +154,13 @@ public class PlayerMovement : MonoBehaviour
     public void StopMoving() {
         rb.velocity = new Vector3(0,0,0);
         rb.isKinematic = true;
+        walking = false;
     }
 
     void RebornHandler() {
         var pushInput = Input.GetKeyDown(KeyCode.R);
         if (pushInput) {
             PlayerManager.instance.Reborn();
-            rb.isKinematic = false;
         }
     }
 }
