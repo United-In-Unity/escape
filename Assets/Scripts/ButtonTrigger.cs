@@ -19,7 +19,7 @@ public class ButtonTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (((pm.transform.position - transform.position)).magnitude < 5) {
+        if (((pm.transform.position - transform.position)).magnitude < 3) {
             pm.button = this;
         }
         else if (pm.button == this) {

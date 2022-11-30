@@ -44,7 +44,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -462,7 +462,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   alive: 1
   walkSpeed: 4
-  jumpSpeed: 6
+  jumpSpeed: 6.5
   box: {fileID: 0}
   canPushBox: 0
   button: {fileID: 0}
@@ -509,11 +509,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 44e1d8cc5e486b246b5a1d9c8d87a7bc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.05
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

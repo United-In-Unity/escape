@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     float pushTimer = 1f;
+
+    bool walking = false;
     
     void Start()
     {
@@ -60,10 +62,22 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude > 0.01 && !isPushing()) {
             rb.velocity = new Vector3(direction.x*walkSpeed, rb.velocity.y, direction.y*walkSpeed);
             anim.SetTrigger("walk");
+            if (isGrounded()&&!walking) {
+                walking = true;
+                PlayerManager.instance.GetComponent<AudioSource>().Play(0);
+            }
         }
         else {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             anim.ResetTrigger("walk");
+            if (walking) {
+                walking = false;
+                PlayerManager.instance.GetComponent<AudioSource>().Pause();
+            }
+        }
+        if (!isGrounded()) {
+            walking = false;
+            PlayerManager.instance.GetComponent<AudioSource>().Pause();
         }
     }
     
@@ -140,13 +154,14 @@ public class PlayerMovement : MonoBehaviour
     public void StopMoving() {
         rb.velocity = new Vector3(0,0,0);
         rb.isKinematic = true;
+        walking = false;
+        PlayerManager.instance.GetComponent<AudioSource>().Pause();
     }
 
     void RebornHandler() {
         var pushInput = Input.GetKeyDown(KeyCode.R);
         if (pushInput) {
             PlayerManager.instance.Reborn();
-            rb.isKinematic = false;
         }
     }
 }
