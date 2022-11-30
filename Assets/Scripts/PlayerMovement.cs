@@ -155,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(0,0,0);
         rb.isKinematic = true;
         walking = false;
+        PlayerManager.instance.GetComponent<AudioSource>().Pause();
     }
 
     void RebornHandler() {
