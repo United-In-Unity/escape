@@ -462,7 +462,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   alive: 1
   walkSpeed: 4
-  jumpSpeed: 6
+  jumpSpeed: 6.5
   box: {fileID: 0}
   canPushBox: 0
   button: {fileID: 0}
