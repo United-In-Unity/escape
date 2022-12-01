@@ -267,6 +267,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2420855025774380701, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
+      propertyPath: DeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b86f0002c247e734b8d0e6c89a0ba533, type: 3}
     - target: {fileID: 3024770383977821545, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
       propertyPath: m_PixelPerfect
       value: 0
@@ -351,6 +355,14 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6149970999076975982, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149970999076975982, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 93c96f0d29b3ea749b2d5b1cf8e8b9c6, type: 3}
     - target: {fileID: 6315807169627415515, guid: 7f67f62ef05f04657965743f93108ad1, type: 3}
       propertyPath: m_enableWordWrapping
       value: 0
@@ -879,6 +891,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5859784148989052310, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859784148989052310, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 04f8fc095d3a5314bafe3c8d7f2a4eb3, type: 3}
     - target: {fileID: 6121648262745223927, guid: fd100bc9e13e91c49b8770f4823bbd1a, type: 3}
       propertyPath: m_Layer
       value: 6
