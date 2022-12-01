@@ -124,19 +124,16 @@ public class GameManager : MonoBehaviour
         currentLevel = 1;
         LoadLevel();
     }
-    public void IncreaseLevel()
-    {
-        if (currentLevel < highestLevel)
-        {
-            currentLevel++;
-            LoadLevel("Level" + currentLevel);
-        }
-    }
 
     public void LoadLevel(string name = "default")
     {
+        if (name == "default") name = "Level" + currentLevel;
         SceneManager.LoadScene(name);
         if (name == "Credits") return;
+        else {
+            currentLevel = int.Parse(name.Substring(5));
+            print(currentLevel);
+        }
         isLoading = true;
         timer = 0f;
         loadingTimer = 0f;
