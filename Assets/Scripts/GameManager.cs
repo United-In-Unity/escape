@@ -12,6 +12,15 @@ public class GameManager : MonoBehaviour
     public GameSound gs;
 
     CanvasGroup cg;
+    AudioSource ads;
+
+    public AudioClip StartScene;
+    public AudioClip Level1;
+    public AudioClip Level2;
+    public AudioClip Level3;
+    public AudioClip Credits;
+
+    List<AudioClip> bgms;
 
     public static int currentLevel = 1;
     public static int highestLevel = 1;
@@ -28,6 +37,8 @@ public class GameManager : MonoBehaviour
     private float loadingTimer = 0f;
     private float loadingTime = 1f;
     public bool isLoading = true;
+
+
 
     int coins = 0;
 
@@ -48,6 +59,14 @@ public class GameManager : MonoBehaviour
     {
         cg = this.gameObject.transform.GetChild(0).GetChild(0).GetComponent<CanvasGroup>();
         gs = GetComponent<GameSound>();
+        ads = GetComponent<AudioSource>();
+        bgms = new List<AudioClip>();
+        bgms.Add(StartScene);
+        bgms.Add(Level1);
+        bgms.Add(Level2);
+        bgms.Add(Level3);
+        bgms.Add(Credits);
+        print(bgms);
     }
 
     void Update()
@@ -124,19 +143,19 @@ public class GameManager : MonoBehaviour
         currentLevel = 1;
         LoadLevel();
     }
-    public void IncreaseLevel()
-    {
-        if (currentLevel < highestLevel)
-        {
-            currentLevel++;
-            LoadLevel("Level" + currentLevel);
-        }
-    }
 
     public void LoadLevel(string name = "default")
     {
+        if (name == "default") name = "Level" + currentLevel;
         SceneManager.LoadScene(name);
-        if (name == "Credits") return;
+        if (name == "Credits") {
+            SetBackgroundMusic(4);
+            return;
+        }
+        else {
+            currentLevel = int.Parse(name.Substring(5));
+            SetBackgroundMusic(currentLevel);
+        }
         isLoading = true;
         timer = 0f;
         loadingTimer = 0f;
@@ -147,6 +166,11 @@ public class GameManager : MonoBehaviour
     {
         coins += 1;
         gs.CollectCoin();
-        print("Coins: " + coins);
+    }
+
+    void SetBackgroundMusic(int index) {
+        ads.Pause();
+        ads.clip = bgms[index];
+        ads.Play(0);
     }
 }

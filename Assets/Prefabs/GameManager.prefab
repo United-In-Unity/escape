@@ -320,6 +320,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gs: {fileID: 0}
+  StartScene: {fileID: 8300000, guid: 93c96f0d29b3ea749b2d5b1cf8e8b9c6, type: 3}
+  Level1: {fileID: 8300000, guid: c0cbaf99e170432438a4dd0daf1d5a0f, type: 3}
+  Level2: {fileID: 8300000, guid: 76981b8302390d241b11d8dce20b0117, type: 3}
+  Level3: {fileID: 8300000, guid: 3cfc4d5d9e423134c839972b6f691255, type: 3}
+  Credits: {fileID: 8300000, guid: 93c96f0d29b3ea749b2d5b1cf8e8b9c6, type: 3}
   _gameTimer: {fileID: 8273135306416192428}
   _gameScore: {fileID: 4500512347607256025}
   _gameHelper: {fileID: 6315807169627415515}
@@ -439,7 +444,7 @@ MonoBehaviour:
   ButtonClickOff: {fileID: 8300000, guid: 5d67ccc032ab5f84da8992ba241d0d6f, type: 3}
   Coinv1: {fileID: 8300000, guid: b9526d2361ad6bb4bb8587ff35be271c, type: 3}
   Coinv2: {fileID: 8300000, guid: a27e91a04381b5742ab2d6c2ccf0dede, type: 3}
-  DeathSound: {fileID: 8300000, guid: d12b74dfd86aa7f4cb9acc8fdc6d76c1, type: 3}
+  DeathSound: {fileID: 8300000, guid: b86f0002c247e734b8d0e6c89a0ba533, type: 3}
   HeadBump: {fileID: 8300000, guid: cadb52ade2e355745a0aac9319f28e7b, type: 3}
 --- !u!1 &4135823552672925343
 GameObject:
