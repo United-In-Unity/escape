@@ -43,14 +43,6 @@ public class PlayerMovement : MonoBehaviour
             JumpHandler();
             PushHandler();
         }
-        else {
-            if (!PlayerManager.instance.isDying){
-                RebornHandler();
-            }
-        }
-        // if (Input.GetButtonDown("Fire1")) {
-        //     // PlayerManager.instance.Die();
-        // }
     }
 
     void WalkHandler() {
@@ -156,12 +148,5 @@ public class PlayerMovement : MonoBehaviour
         rb.isKinematic = true;
         walking = false;
         PlayerManager.instance.GetComponent<AudioSource>().Pause();
-    }
-
-    void RebornHandler() {
-        var pushInput = Input.GetKeyDown(KeyCode.R);
-        if (pushInput) {
-            PlayerManager.instance.Reborn();
-        }
     }
 }
