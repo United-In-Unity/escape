@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    CapsuleCollider cl;
+    public CapsuleCollider cl;
     Animator anim;
 
     public GameObject click;

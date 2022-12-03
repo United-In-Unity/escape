@@ -134,4 +134,8 @@ public class PlayerManager : MonoBehaviour
         halo.intensity = intensity;
         GameManager.instance.LoadLevel();
     }
+
+    public Vector3 getPos() {
+        return pm.cl.center + transform.position;
+    }
 }
