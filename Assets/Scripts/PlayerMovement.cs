@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider cl;
     Animator anim;
 
+    public GameObject click;
+
     public bool alive = true;
 
     public float walkSpeed = 4.0f;
@@ -114,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (pushInput && canPushBox){
             anim.SetTrigger("kick");
             box.Push(direction);
+            PushEffect();
             hasPushedBox = true;
             pushTimer = 0f;
             GameManager.instance.gs.PlayerBump();
@@ -128,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("bump");
             button.Push();
+            PushEffect();
             hasPushedButton = true;
             pushTimer = 0f;
             GameManager.instance.gs.ClickButton();
@@ -148,5 +152,10 @@ public class PlayerMovement : MonoBehaviour
         rb.isKinematic = true;
         walking = false;
         PlayerManager.instance.GetComponent<AudioSource>().Pause();
+    }
+
+    public void PushEffect() {
+        var vfx = Instantiate(click, anim.transform.position +1.3f* anim.transform.forward+new Vector3(0,1,0), anim.transform.rotation);
+        Destroy(vfx, vfx.GetComponent<ParticleSystem>().main.duration);
     }
 }

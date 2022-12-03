@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  click: {fileID: 5268604893454429839, guid: 17f805773b7aa4d4d9f144d80d52fa9c, type: 3}
   alive: 1
   walkSpeed: 4
   jumpSpeed: 6.5

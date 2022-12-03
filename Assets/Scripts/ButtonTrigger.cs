@@ -9,6 +9,7 @@ public class ButtonTrigger : MonoBehaviour
     // Start is called before the first frame update
     public GameObject buttonCenter;
 
+
     bool pushed = false;
     PlayerMovement pm;
     void Start()
