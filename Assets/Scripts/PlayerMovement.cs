@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    CapsuleCollider cl;
+    public CapsuleCollider cl;
     Animator anim;
+
+    public GameObject click;
 
     public bool alive = true;
 
@@ -43,14 +45,6 @@ public class PlayerMovement : MonoBehaviour
             JumpHandler();
             PushHandler();
         }
-        else {
-            if (!PlayerManager.instance.isDying){
-                RebornHandler();
-            }
-        }
-        // if (Input.GetButtonDown("Fire1")) {
-        //     // PlayerManager.instance.Die();
-        // }
     }
 
     void WalkHandler() {
@@ -122,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (pushInput && canPushBox){
             anim.SetTrigger("kick");
             box.Push(direction);
+            PushEffect();
             hasPushedBox = true;
             pushTimer = 0f;
             GameManager.instance.gs.PlayerBump();
@@ -136,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("bump");
             button.Push();
+            PushEffect();
             hasPushedButton = true;
             pushTimer = 0f;
             GameManager.instance.gs.ClickButton();
@@ -158,10 +154,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerManager.instance.GetComponent<AudioSource>().Pause();
     }
 
-    void RebornHandler() {
-        var pushInput = Input.GetKeyDown(KeyCode.R);
-        if (pushInput) {
-            PlayerManager.instance.Reborn();
-        }
+    public void PushEffect() {
+        var vfx = Instantiate(click, anim.transform.position +1.3f* anim.transform.forward+new Vector3(0,1,0), anim.transform.rotation);
+        Destroy(vfx, vfx.GetComponent<ParticleSystem>().main.duration);
     }
 }
