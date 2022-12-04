@@ -78,6 +78,7 @@ public class PlayerManager : MonoBehaviour
                 isExploding = false;
                 isDying = false;
                 Reborn();
+                GameManager.instance.LoadLevel();
             }
         }
     }
@@ -132,7 +133,6 @@ public class PlayerManager : MonoBehaviour
         leg3.material.SetColor("_EmissionColor", customColor);
         leg4.material.SetColor("_EmissionColor", customColor);
         halo.intensity = intensity;
-        GameManager.instance.LoadLevel();
     }
 
     public Vector3 getPos() {

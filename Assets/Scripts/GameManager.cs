@@ -138,17 +138,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Reset()
-    {
-        currentLevel = 1;
-        LoadLevel();
-    }
-
     public void LoadLevel(string name = "default")
     {
         if (name == "default") name = "Level" + currentLevel;
         SceneManager.LoadScene(name);
-        if (name == "Credits") {
+        if (name == "Credits" || name == "StartScene") {
             SetBackgroundMusic(4);
             return;
         }
