@@ -133,6 +133,7 @@ public class PlayerManager : MonoBehaviour
         leg3.material.SetColor("_EmissionColor", customColor);
         leg4.material.SetColor("_EmissionColor", customColor);
         halo.intensity = intensity;
+        deathTimer = deathTime+explosionTime + 1;
     }
 
     public Vector3 getPos() {

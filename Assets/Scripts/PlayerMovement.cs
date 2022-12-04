@@ -48,8 +48,8 @@ public class PlayerMovement : MonoBehaviour
         else {
             var exitInput = Input.GetKeyDown(KeyCode.Escape);
             if (exitInput) {
-                PlayerManager.instance.Reborn();
                 GameManager.instance.LoadLevel("StartScene");
+                PlayerManager.instance.Reborn();
             }
         }
     }

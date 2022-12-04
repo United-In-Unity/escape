@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelTrigger : MonoBehaviour
 {
     public string levelName;
+    public bool toCurrentLevel = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,12 @@ public class LevelTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider cl) {
         if (cl.gameObject.tag == "Player") {
-            GameManager.instance.LoadLevel(levelName);
+            if (toCurrentLevel) {
+                GameManager.instance.LoadLevel();
+            }
+            else {
+                GameManager.instance.LoadLevel(levelName);
+            }
         }
     }
 }
