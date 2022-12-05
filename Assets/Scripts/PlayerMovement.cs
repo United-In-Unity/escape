@@ -103,11 +103,26 @@ public class PlayerMovement : MonoBehaviour
     }
 
     bool isGrounded() {
+        float sizeX = cl.bounds.size.x;
         float sizeY = cl.bounds.size.y;
+        float sizeZ = cl.bounds.size.z;
         Vector3 pos = cl.bounds.center;
-        Vector3 bottom = pos + new Vector3(0, -sizeY/2 + 0.1f, 0);
-        bool grounded = Physics.Raycast(bottom, new Vector3(0, -1, 0), 0.15f);
-        return grounded;
+        Vector3 bottom1 = pos + new Vector3(0, -sizeY/2 + 0.1f, 0);
+        Vector3 bottom2 = pos + new Vector3(sizeX/2, -sizeY/2 + 0.1f, sizeZ/2);
+        Vector3 bottom3 = pos + new Vector3(-sizeX/2, -sizeY/2 + 0.1f,sizeZ/2);
+        Vector3 bottom4 = pos + new Vector3(sizeX/2, -sizeY/2 + 0.1f, -sizeZ/2);
+        Vector3 bottom5 = pos + new Vector3(-sizeX/2, -sizeY/2 + 0.1f, -sizeZ/2);
+        bool grounded1 = Physics.Raycast(bottom1, new Vector3(0, -1, 0), 0.15f);
+        if (grounded1) return true;
+        bool grounded2 = Physics.Raycast(bottom1, new Vector3(0, -1, 0), 0.15f);
+        if (grounded2) return true;
+        bool grounded3 = Physics.Raycast(bottom1, new Vector3(0, -1, 0), 0.15f);
+        if (grounded3) return true;
+        bool grounded4 = Physics.Raycast(bottom1, new Vector3(0, -1, 0), 0.15f);
+        if (grounded4) return true;
+        bool grounded5 = Physics.Raycast(bottom1, new Vector3(0, -1, 0), 0.15f);
+        if (grounded5) return true;
+        return false;
     }
 
     void PushHandler() {
