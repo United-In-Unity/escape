@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
             WalkHandler();
             JumpHandler();
             PushHandler();
+            HeightCheck();
         }
         else {
             var exitInput = Input.GetKeyDown(KeyCode.Escape);
@@ -164,5 +165,11 @@ public class PlayerMovement : MonoBehaviour
     public void PushEffect() {
         var vfx = Instantiate(click, anim.transform.position +1.3f* anim.transform.forward+new Vector3(0,1,0), anim.transform.rotation);
         Destroy(vfx, vfx.GetComponent<ParticleSystem>().main.duration);
+    }
+
+    void HeightCheck() {
+        if (transform.position.y < -40) {
+            PlayerManager.instance.Die();
+        }
     }
 }
