@@ -78,6 +78,7 @@ public class PlayerManager : MonoBehaviour
                 isExploding = false;
                 isDying = false;
                 Reborn();
+                GameManager.instance.LoadLevel();
             }
         }
     }
@@ -107,7 +108,6 @@ public class PlayerManager : MonoBehaviour
     public void Die() {
         if (pm.alive) {
             GameManager.instance.gs.PlayerDie();
-            print("Player is dead!!! Dead animation is playing...");
             anim.SetBool("isDead", true);
             deathTimer = 0f;
             pm.alive = false;
@@ -117,7 +117,6 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void Reborn() {
-        print("Player is alive!!!");
         anim.SetBool("isDead", false);
         pm.alive = true;
         character.SetActive(true);
@@ -132,7 +131,7 @@ public class PlayerManager : MonoBehaviour
         leg3.material.SetColor("_EmissionColor", customColor);
         leg4.material.SetColor("_EmissionColor", customColor);
         halo.intensity = intensity;
-        GameManager.instance.LoadLevel();
+        deathTimer = deathTime+explosionTime + 1;
     }
 
     public Vector3 getPos() {

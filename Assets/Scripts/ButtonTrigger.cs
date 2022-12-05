@@ -35,7 +35,6 @@ public class ButtonTrigger : MonoBehaviour
         buttonCenter.transform.position += offset*0.2f;
         pushed = true;
         if (obj.tag == "Door") {
-            print("OPEN THE DAMN DOOR!!!");
             obj.Trigger();
         }
         else {

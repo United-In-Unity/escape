@@ -45,6 +45,13 @@ public class PlayerMovement : MonoBehaviour
             JumpHandler();
             PushHandler();
         }
+        else {
+            var exitInput = Input.GetKeyDown(KeyCode.Escape);
+            if (exitInput) {
+                GameManager.instance.LoadLevel("StartScene");
+                PlayerManager.instance.Reborn();
+            }
+        }
     }
 
     void WalkHandler() {
