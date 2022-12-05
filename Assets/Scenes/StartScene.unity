@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: Level1
+  toCurrentLevel: 1
 --- !u!65 &107886065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -247,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: Level1
+  toCurrentLevel: 1
 --- !u!65 &417483363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -411,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: Level1
+  toCurrentLevel: 1
 --- !u!65 &1555082131
 BoxCollider:
   m_ObjectHideFlags: 0

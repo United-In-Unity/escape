@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
         bgms.Add(Level2);
         bgms.Add(Level3);
         bgms.Add(Credits);
-        print(bgms);
     }
 
     void Update()
